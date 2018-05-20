@@ -2,7 +2,10 @@ package org.launchcode.techjobs.console;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+
+import static org.launchcode.techjobs.console.JobData.loadData;
 
 /**
  * Created by LaunchCode
@@ -61,10 +64,13 @@ public class TechJobs {
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
+                    //System.out.println("****"+ searchField + " : "+ searchTerm + "****");
+                    printJobs(JobData.findByValue(searchTerm));
+
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
+
             }
         }
     }
@@ -111,6 +117,36 @@ public class TechJobs {
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
-        System.out.println("printJobs is not implemented yet");
+        for(HashMap<String, String>job: someJobs) {
+            for (Map.Entry<String, String> jj : job.entrySet()) {
+
+                System.out.println( jj.getKey() +": " +  jj.getValue() );
+
+            }
+           System.out.println(" ");
+        }
+
+        /**for(String j : HashMap<String, String>job)
+        if(n.equals("1")){
+            String value= in.next()
+             System.out.println(JobData.findByColumnAndValue(1, ));
+        **/}
+
+
+
+
+        /**if(someJobs.get(0).equals(0)){
+            System.out.println(JobData.findAll());
+        } else if(someJobs.get(0).equals(1)) {
+            String column= in.next();
+            String value=in.next() ;
+        System.out.println(JobData.findByColumnAndValue(column, value));
+        }else if(someJobs.get(0).equals(2)) {
+            String column=in.next();
+            String value=in.next() ;
+            System.out.println(JobData.findByColumnAndValue(column, value));
+
+        }**/
+        //System.out.println("printJobs is not implemented yet");
+
     }
-}

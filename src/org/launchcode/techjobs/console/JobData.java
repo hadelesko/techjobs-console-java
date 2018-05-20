@@ -4,12 +4,14 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by LaunchCode
@@ -19,7 +21,9 @@ public class JobData {
     private static final String DATA_FILE = "resources/job_data.csv";
     private static Boolean isDataLoaded = false;
 
-    private static ArrayList<HashMap<String, String>> allJobs;
+    public static ArrayList<HashMap<String, String>> allJobs;
+
+    File file= new File(DATA_FILE);
 
     /**
      * Fetch list of all values from loaded data,
@@ -28,6 +32,8 @@ public class JobData {
      * @param field The column to retrieve values from
      * @return List of all of the values of the given field
      */
+
+
     public static ArrayList<String> findAll(String field) {
 
         // load data, if not already loaded
@@ -46,7 +52,55 @@ public class JobData {
         return values;
     }
 
-    public static ArrayList<HashMap<String, String>> findAll() {
+    //public static ArrayList<String> findBySearchterm(String searchTerm) {
+
+        /**
+         * c) Conversion Of HashMap’s Key-Value Pairs Into ArrayList :
+         *
+         * For this, we use entrySet() method of HashMap which returns the Set of Entry<K, V> objects where each Entry object represents one key-value pair. We pass this Set to create the ArrayList of key-value pairs.
+
+         * //Creating a HashMap object
+         *
+         * HashMap<String, String> map = new HashMap<String, String>();
+         *
+         * //Getting the Set of entries
+         *
+         * Set<Entry<String, String>> entrySet = map.entrySet();
+         *
+         * //Creating an ArrayList Of Entry objects
+         *
+         * ArrayList<Entry<String, String>> listOfEntry = new ArrayList<Entry<String,String>>(entrySet);
+    }
+
+    /*/
+        public static ArrayList<HashMap<String, String>> findByValue (String value) {
+
+            loadData();
+
+            ArrayList<HashMap<String, String>> searchItem = new ArrayList<>();
+
+            for (HashMap<String, String> row : allJobs) {
+
+                for (Map.Entry<String, String> listing : row.entrySet()) {
+
+                    if (listing.getValue().toLowerCase().contains(value.toLowerCase())) {
+
+                        searchItem.add(row);
+
+                    }
+
+                }
+
+            }
+
+            return searchItem;
+
+        }
+
+
+
+
+        public static ArrayList<HashMap<String, String>> findAll() {
 
         // load data, if not already loaded
         loadData();
@@ -87,7 +141,7 @@ public class JobData {
     /**
      * Read in data from a CSV file and store it in a list
      */
-    private static void loadData() {
+    public static void loadData() {
 
         // Only load data once
         if (isDataLoaded) {
