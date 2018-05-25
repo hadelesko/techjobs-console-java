@@ -1,10 +1,8 @@
 package org.launchcode.techjobs.console;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
+import static org.launchcode.techjobs.console.JobData.findByValue;
 import static org.launchcode.techjobs.console.JobData.loadData;
 
 /**
@@ -14,7 +12,7 @@ public class TechJobs {
 
     private static Scanner in = new Scanner(System.in);
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
@@ -109,7 +107,7 @@ public class TechJobs {
                 validChoice = true;
             }
 
-        } while(!validChoice);
+        } while (!validChoice);
 
         return choiceKeys[choiceIdx];
     }
@@ -117,36 +115,24 @@ public class TechJobs {
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
-        for(HashMap<String, String>job: someJobs) {
-            for (Map.Entry<String, String> jj : job.entrySet()) {
+        // 2 lines of code here
+        if(someJobs.isEmpty()){
+            System.out.println("No result found!");
+        }else{
 
-                System.out.println( jj.getKey() +": " +  jj.getValue() );
 
+            for (HashMap<String, String> job : someJobs) {
+
+
+                System.out.println("******************");
+                for (Map.Entry<String, String> jj : job.entrySet()) {
+                    System.out.println(jj.getKey() + ": " + jj.getValue());
+                    //myjobs.put(jj.getKey(), jj.getValue());
+                }
+                System.out.println(" ");
             }
-           System.out.println(" ");
         }
-
-        /**for(String j : HashMap<String, String>job)
-        if(n.equals("1")){
-            String value= in.next()
-             System.out.println(JobData.findByColumnAndValue(1, ));
-        **/}
-
-
-
-
-        /**if(someJobs.get(0).equals(0)){
-            System.out.println(JobData.findAll());
-        } else if(someJobs.get(0).equals(1)) {
-            String column= in.next();
-            String value=in.next() ;
-        System.out.println(JobData.findByColumnAndValue(column, value));
-        }else if(someJobs.get(0).equals(2)) {
-            String column=in.next();
-            String value=in.next() ;
-            System.out.println(JobData.findByColumnAndValue(column, value));
-
-        }**/
-        //System.out.println("printJobs is not implemented yet");
-
     }
+}
+
+

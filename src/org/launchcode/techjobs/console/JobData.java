@@ -56,21 +56,15 @@ public class JobData {
 
         /**
          * c) Conversion Of HashMap’s Key-Value Pairs Into ArrayList :
-         *
-         * For this, we use entrySet() method of HashMap which returns the Set of Entry<K, V> objects where each Entry object represents one key-value pair. We pass this Set to create the ArrayList of key-value pairs.
-
+         * For this, we use entrySet() method of HashMap which returns the Set of Entry<K, V> objects
+         * where each Entry object represents one key-value pair. We pass this Set to create the ArrayList of key-value pairs.
          * //Creating a HashMap object
-         *
          * HashMap<String, String> map = new HashMap<String, String>();
-         *
          * //Getting the Set of entries
-         *
          * Set<Entry<String, String>> entrySet = map.entrySet();
-         *
          * //Creating an ArrayList Of Entry objects
-         *
          * ArrayList<Entry<String, String>> listOfEntry = new ArrayList<Entry<String,String>>(entrySet);
-    }
+
 
     /*/
         public static ArrayList<HashMap<String, String>> findByValue (String value) {
@@ -81,24 +75,25 @@ public class JobData {
 
             for (HashMap<String, String> row : allJobs) {
 
-                for (Map.Entry<String, String> listing : row.entrySet()) {
+                for (Map.Entry<String, String> mylisting : row.entrySet()) {
+                    //int sizeofresult= 0;
 
-                    if (listing.getValue().toLowerCase().contains(value.toLowerCase())) {
+                    if (mylisting.getValue().toLowerCase().contains(value.toLowerCase())) {
 
                         searchItem.add(row);
-
+                        //sizeofresult+=1;
+                        //break;
                     }
 
                 }
 
             }
 
-            return searchItem;
-
+                return searchItem;
+            }
+     public static int countResult(String value){
+            return findByValue(value).size();
         }
-
-
-
 
         public static ArrayList<HashMap<String, String>> findAll() {
 
@@ -127,17 +122,17 @@ public class JobData {
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
         for (HashMap<String, String> row : allJobs) {
-
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue.toLowerCase().contains(value.toLowerCase())) {
+
                 jobs.add(row);
             }
         }
 
         return jobs;
-    }
 
+    }
     /**
      * Read in data from a CSV file and store it in a list
      */
